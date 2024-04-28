@@ -21,6 +21,7 @@ SettingsPage {
     property var    _settingsManager:           QGroundControl.settingsManager
     property var     _adsbSettings:             _settingsManager.adsbVehicleManagerSettings
     property Fact   _adsbServerConnectEnabled:  _adsbSettings.adsbServerConnectEnabled
+    property Fact   _adsbMessageFormat:         _adsbSettings.adsbMessageFormat
 
     SettingsGroupLayout {
         Layout.fillWidth:   true
@@ -30,6 +31,13 @@ SettingsPage {
             Layout.fillWidth:   true
             text:               fact.shortDescription
             fact:               _adsbServerConnectEnabled
+            visible:            fact.visible
+        }
+
+        FactComboBox {
+            Layout.fillWidth:   true
+            fact:               _adsbMessageFormat
+            indexModel:         false
             visible:            fact.visible
         }
     }
@@ -52,5 +60,6 @@ SettingsPage {
             fact:               _adsbSettings.adsbServerPort
             visible:            fact.visible
         }
+
     }
 }

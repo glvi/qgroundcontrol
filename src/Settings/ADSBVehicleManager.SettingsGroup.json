@@ -1,6 +1,11 @@
 {
     "version":      1,
     "fileType":  "FactMetaData",
+    "translateKeys": "AdsbMessageFormatEnumStrings",
+    "QGC.MetaData.Defines": {
+      "AdsbMessageFormatEnumStrings":  "SBS-1 Basestation Format,MAVLINK",
+      "AdsbMessageFormatEnumValues":   "0,1"
+    },
     "QGC.MetaData.Facts":
 [
 {
@@ -24,6 +29,15 @@
     "type":                 "string",
     "default":         30003,
     "qgcRebootRequired":    true
+},
+{
+  "name":              "adsbMessageFormat",
+  "shortDesc":         "Message format",
+  "type":              "int32",
+  "enumStrings":       "QGC.MetaData.Defines.AdsbMessageFormatEnumStrings",
+  "enumValues":        "QGC.MetaData.Defines.AdsbMessageFormatEnumValues",
+  "default":           0,
+  "qgcRebootRequired": true
 }
 ]
 }

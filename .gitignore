@@ -32,6 +32,7 @@ doc/html
 doc/doxy.log
 controller_log*
 user_config.pri
+compile_commands.json
 *.app
 *.ncb
 *.vcproj

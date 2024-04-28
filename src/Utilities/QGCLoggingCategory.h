@@ -22,6 +22,7 @@ Q_DECLARE_LOGGING_CATEGORY(ParameterManagerLog)
 Q_DECLARE_LOGGING_CATEGORY(GeotaggingLog)
 Q_DECLARE_LOGGING_CATEGORY(RTKGPSLog)
 Q_DECLARE_LOGGING_CATEGORY(GuidedActionsControllerLog)
+Q_DECLARE_LOGGING_CATEGORY(ADSBVehicleManagerLog)
 Q_DECLARE_LOGGING_CATEGORY(LocalizationLog)
 Q_DECLARE_LOGGING_CATEGORY(VideoAllLog) // turns on all individual QGC video logs
 Q_DECLARE_LOGGING_CATEGORY(JoystickLog)
@@ -58,13 +59,13 @@ public:
 
 private:
     QGCLoggingCategoryRegister(void) { }
-    
+
     QStringList _registeredCategories;
     QString     _commandLineLoggingOptions;
 
     static const char* _filterRulesSettingsGroup;
 };
-        
+
 class QGCLoggingCategory
 {
 public:

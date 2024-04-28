@@ -21,4 +21,5 @@ public:
     DEFINE_SETTINGFACT(adsbServerConnectEnabled)
     DEFINE_SETTINGFACT(adsbServerHostAddress)
     DEFINE_SETTINGFACT(adsbServerPort)
+    DEFINE_SETTINGFACT(adsbMessageFormat)
 };

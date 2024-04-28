@@ -13,65 +13,40 @@
 #include "QmlObjectListModel.h"
 #include "ADSBVehicle.h"
 
-#include <QtCore/QThread>
-#include <QtCore/QTimer>
+#include <QTcpSocket>
+#include <QThread>
+#include <QTimer>
 
-class ADSBVehicleManagerSettings;
-class QTcpSocket;
-
-class ADSBTCPLink : public QThread
-{
-    Q_OBJECT
-
-public:
-    ADSBTCPLink(const QString& hostAddress, int port, QObject* parent);
-    ~ADSBTCPLink();
-
-signals:
-    void adsbVehicleUpdate(const ADSBVehicle::ADSBVehicleInfo_t vehicleInfo);
-    void error(const QString errorMsg);
-
-protected:
-    void run(void) final;
-
-private slots:
-    void _readBytes(void);
-
-private:
-    void _hardwareConnect(void);
-    void _parseLine(const QString& line);
-
-    QString         _hostAddress;
-    int             _port;
-    QTcpSocket*     _socket =   nullptr;
-    void _parseAndEmitCallsign(ADSBVehicle::ADSBVehicleInfo_t &adsbInfo, QStringList values);
-    void _parseAndEmitLocation(ADSBVehicle::ADSBVehicleInfo_t &adsbInfo, QStringList values);
-    void _parseAndEmitHeading(ADSBVehicle::ADSBVehicleInfo_t &adsbInfo, QStringList values);
-};
+namespace ADSB {
+    Q_NAMESPACE
+}
 
 class ADSBVehicleManager : public QGCTool {
     Q_OBJECT
-    
+
 public:
     ADSBVehicleManager(QGCApplication* app, QGCToolbox* toolbox);
+    virtual ~ADSBVehicleManager();
 
     Q_PROPERTY(QmlObjectListModel* adsbVehicles READ adsbVehicles CONSTANT)
 
-    QmlObjectListModel* adsbVehicles(void) { return &_adsbVehicles; }
+    QmlObjectListModel* adsbVehicles() { return &_adsbVehicles; }
 
     // QGCTool overrides
     void setToolbox(QGCToolbox* toolbox) final;
 
 public slots:
-    void adsbVehicleUpdate  (const ADSBVehicle::ADSBVehicleInfo_t vehicleInfo);
-    void _tcpError          (const QString errorMsg);
+    void adsbVehicleUpdate  (ADSBVehicle::ADSBVehicleInfo_t const& vehicleInfo);
 
 private slots:
-    void _cleanupStaleVehicles(void);
+    void _cleanupStaleVehicles();
 
 private:
-    QmlObjectListModel              _adsbVehicles;
-    QMap<uint32_t, ADSBVehicle*>    _adsbICAOMap;
-    QTimer                          _adsbVehicleCleanupTimer;
-    ADSBTCPLink*                    _tcpLink = nullptr;
+    QmlObjectListModel           _adsbVehicles;
+    QMap<uint32_t, ADSBVehicle*> _adsbICAOMap;
+    QTimer                       _adsbVehicleCleanupTimer;
 };
+
+// Local Variables:
+// c-basic-offset: 4
+// End:

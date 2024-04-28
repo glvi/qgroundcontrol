@@ -15,13 +15,16 @@
 
 QGC_LOGGING_CATEGORY(ADSBVehicleManagerLog, "ADSBVehicleManagerLog")
 
+static_assert(uint32_t() == 0);
+static_assert(double() == 0.0);
+static_assert(bool() == false);
+static_assert(ADSBVehicle::EmitterCategory() == ADSBVehicle::EmitterCategory::NoInformation);
+
 ADSBVehicle::ADSBVehicle(const ADSBVehicleInfo_t & vehicleInfo, QObject* parent)
     : QObject       (parent)
     , _icaoAddress  (vehicleInfo.icaoAddress)
-    , _coordinate   (QGeoCoordinate(qQNaN(),qQNaN()))
     , _altitude     (qQNaN())
     , _heading      (qQNaN())
-    , _alert        (false)
 {
     update(vehicleInfo);
 }
@@ -34,6 +37,12 @@ void ADSBVehicle::update(const ADSBVehicleInfo_t & vehicleInfo)
     }
     qCDebug(ADSBVehicleManagerLog) << "Updating" << QStringLiteral("%1 Flags: %2").arg(vehicleInfo.icaoAddress, 0, 16).arg(vehicleInfo.availableFlags, 0, 2);
 
+    if (vehicleInfo.availableFlags & CategoryAvailable) {
+        if (vehicleInfo.category != _category) {
+            _category = vehicleInfo.category;
+            emit categoryChanged();
+        }
+    }
     if (vehicleInfo.availableFlags & CallsignAvailable) {
         if (vehicleInfo.callsign != _callsign) {
             _callsign = vehicleInfo.callsign;

@@ -60,6 +60,10 @@
         <file alias="attitudeInstrument.svg">src/FlightMap/Images/attitudeInstrument.svg</file>
         <file alias="attitudePointer.svg">src/FlightMap/Images/attitudePointer.svg</file>
         <file alias="AwarenessAircraft.svg">src/FlightMap/Images/AwarenessAircraft.svg</file>
+        <file alias="LightAircraft.svg">src/FlightMap/Images/LightAircraft.svg</file>
+        <file alias="SmallAircraft.svg">src/FlightMap/Images/SmallAircraft.svg</file>
+        <file alias="LargeAircraft.svg">src/FlightMap/Images/LargeAircraft.svg</file>
+        <file alias="HeavyAircraft.svg">src/FlightMap/Images/HeavyAircraft.svg</file>
         <file alias="Battery.svg">src/ui/toolbar/Images/Battery.svg</file>
         <file alias="camera.svg">resources/camera.svg</file>
         <file alias="camera_photo.svg">src/Camera/images/camera_photo.svg</file>

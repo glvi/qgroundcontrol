@@ -299,6 +299,7 @@ FlightMap {
             coordinate:     object.coordinate
             altitude:       object.altitude
             callsign:       object.callsign
+            category:       object.category
             heading:        object.heading
             alert:          object.alert
             map:            _root
@@ -641,7 +642,7 @@ FlightMap {
                     }
                     globals.guidedControllerFlyView.confirmAction(globals.guidedControllerFlyView.actionSetEstimatorOrigin, mapClickCoord)
                 }
-            }        
+            }
         }
     }
 
